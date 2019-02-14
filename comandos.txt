@@ -1,0 +1,3 @@
+java -jar Cifrado.jar -ctth -e -c MobyDick.txt
+
+java -jar Cifrado.jar -ctth -e -c C:\Users\ACER\Documents\NetBeansProjects\trithemius\quijote.txt

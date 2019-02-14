@@ -1,0 +1,47 @@
+[33mcommit be5d72d81b3a2b42f3473a52141212e2ddda6f3e[m[33m ([m[1;36mHEAD -> [m[1;32malternativa2[m[33m)[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Wed Oct 3 19:43:30 2018 -0500
+
+    Solucionado problema de utf-8
+
+[33mcommit a3c35203b587741b8ecf3025d3527fce18d87bea[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Wed Oct 3 18:39:28 2018 -0500
+
+    corregido problema de eficacia, cifra, problemas con descifrar
+
+[33mcommit b6f4e715fd3878d7bfc4926cc1987b5a024cd4c6[m[33m ([m[1;32mmaster[m[33m)[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Wed Oct 3 17:42:29 2018 -0500
+
+    pre alternativa
+
+[33mcommit 0caf29a81b260957cdf0480550aa79ebf29c96eb[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Wed Oct 3 16:34:48 2018 -0500
+
+    Agregado el comando tu upper case
+
+[33mcommit e7169e1372b6dda8ccc9f685856fa8a9d2d6e111[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Wed Oct 3 15:05:54 2018 -0500
+
+    sin busqueda binaria, pre rama alternativa
+
+[33mcommit a997debd0fc3a49b0f2dc362ceec6723a0821dbb[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Wed Oct 3 02:14:44 2018 -0500
+
+    finalizado algoritmo de trithemius falto optimizar
+
+[33mcommit 0ee729f2972b031e82647cad2f8d9515365bed4c[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Tue Oct 2 23:08:24 2018 -0500
+
+    algoritmo funcional con validaciones e informacion del menu, falta optimizacion
+
+[33mcommit af535529c631b6144d6632f8a630e920a7886c98[m
+Author: philipretl <philipreaver@gmail.com>
+Date:   Tue Oct 2 19:41:52 2018 -0500
+
+    Inicio del algoritmo sin optimizacion
