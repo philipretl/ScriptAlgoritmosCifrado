@@ -21,8 +21,9 @@ public class Cifrado {
      */
     public static void main(String[] args) throws IOException {
         String valor="";
+        boolean flag=false;
         Trithemius trit = new Trithemius();
-        Alberti albert = new Alberti();
+        Transpocision transp = new Transpocision();
         long startTime = System.currentTimeMillis();
         Codi64 cod64 = new Codi64();
         // prueba
@@ -32,7 +33,7 @@ public class Cifrado {
         if(args.length==0 || args.length==1 ){
             System.out.println("--------------------------------------------------------------------\n      Algoritmos de Cifrado\n Sintaxis: java -jar Cifrado.jar <algoritmo> <parametros>");
             System.out.println(" \n<algoritmo>:\n          -ctth Algoritmo de cifrado de trithemius");
-            System.out.println(" \n<algoritmo>:\n          -calb Algoritmo de cifrado de trithemius");
+            System.out.println(" \n<algoritmo>:\n          -ctr Algoritmos de cifrado por transpocision");
             System.out.println(" \nConsultar la ayuda de un algoritmo en especifico: \n");
             System.out.println("        sintaxis: java -jar Cifrado.jar <algoritmo> -a");
             
@@ -55,42 +56,49 @@ public class Cifrado {
                     System.out.println(" <modo> -c para cifrar\n        -d para descifrar\n\n");
                     System.out.println(" <Archivo entrada>: nombre del archivo de entrada\n");
                     System.out.println(" si <modo> es -c el <Archivo de entrada> tiene extension .txt");
-                    System.out.println(" si <modo> es -d el <Archivo de entrada> tiene extension .cif");
-                    System.out.println(" \nsi <codificacion> es -64 sera codificado a base 64");
-                    System.out.println(" \nsi <codificacion> es -n mantendra la codificacion original");
+                    System.out.println(" si <modo> es -d y <codificacion> -n el <Archivo de entrada> tiene extension .cif");
+                    System.out.println(" si <modo>(b64) es -d y <codificacion> -64 el <Archivo de entrada> tiene extension .cif64");
+                    System.out.println(" \n<codificacion> es -64 sera codificado a base 64");
+                    System.out.println(" \n<codificacion> es -n mantendra la codificacion original");
                     System.out.println("\n\n Salidas: \n      si <modo> : es -c la salida sera .cif");
                     System.out.println("                  es -d la salida sera .def ");
-                    System.out.println(" \nEjemplos:");
+                    System.out.println("\n\n Salidas(b64): \n      si <modo> : es -c y <codificacion> -64 la salida sera .cif64");
+                    System.out.println("                  es -d la salida sera .dec64");
+                    System.out.println(" \n Ejemplos:");
                     System.out.println("         Cifrar: java -jar Cifrado.jar -c -e prueba.txt ");
                     System.out.println("         Descifrar: java -jar Cifrado.jar -d -e prueba.txt.cif ");
                     System.out.println("\nElaborado por: Andres Felipe Vega felipevega@unicauca.edu.co");
-                }else{
-                    System.out.println("Error de sintaxis.");
-                
+                    flag=true;
                 }
                 
-                if (com2.equals("-a") && com1.equals("-calb")){
+                if (com2.equals("-a") && com1.equals("-ctr")){
                     System.out.println("--------------------------------------------------------------------");
-                    System.out.println("       Algoritmo de cifrado de Alberti\n");
-                    System.out.println(" Sintaxis: java -jar Cifrado.jar -calb <modo> <n-cifradas> <paso>\n <letraExterna> <letraInterna> <codificacion> -e <Archivo entrada>\n");
+                    System.out.println("       Algoritmos de cifrado por Transpocision\n");
+                    System.out.println(" Sintaxis: java -jar Cifrado.jar -ctr <modo> <tipo> <codificacion> -e <Archivo entrada>\n");
                     System.out.println(" <modo> -c para cifrar\n        -d para descifrar\n");
-                    System.out.println(" <n-cifradas>\n        (Entero)cada cuantas letras cifradas debe girar el disco externo\n");
-                    System.out.println(" <paso>\n        (Entero) cada n-letras cifradas, cuantas pocisiones gira el disco externo\n");
-                    System.out.println(" <letraExterna>\n        (Caracter) La letra del disco externo que coincidira inicialmente con <letraInterna>\n");
-                    System.out.println(" <letraInterna>\n        (Caracter) la letra del disco interno que coincidira inicialmente con <letraExterna>\n");
-                    System.out.println(" \nsi <codificacion> es -64 sera codificado a base 64");
-                    System.out.println(" \nsi <codificacion> es -n mantendra la codificacion original");
+                    System.out.println(" <tipo> -ts transpocision simple");
+                    System.out.println(" <tipo> -td transpocision doble");
+                    System.out.println(" <tipo> -ti transpocision inversa");
+                    System.out.println(" \n<codificacion> es -64 sera codificado a base 64");
+                    System.out.println(" \n<codificacion> es -n mantendra la codificacion original\n");
                     System.out.println(" <Archivo entrada> nombre del archivo de entrada\n");
                     System.out.println(" si <modo> es -c el <Archivo de entrada> tiene extension .txt");
                     System.out.println(" si <modo> es -d el <Archivo de entrada> tiene extension .cif");
+                    System.out.println(" si <modo> es -d y <codificacion> -n el <Archivo de entrada> tiene extension .cif");
+                    System.out.println(" si <modo>(b64) es -d y <codificacion> -64 el <Archivo de entrada> tiene extension .cif64");
+                   
                     System.out.println("\n Salidas: \n      si <modo> : es -c la salida sera .cif");
-                    System.out.println("                  es -d la salida sera .def ");
+                    System.out.println("                  es -d la salida sera .dec ");
+                    System.out.println("\n\n Salidas(b64): \n      si <modo> : es -c y <codificacion> -64 la salida sera .cif64");
+                    System.out.println("                  es -d la salida sera .dec64");
                     System.out.println(" \nEjemplos:");
-                    System.out.println("         Cifrar: java -jar Cifrado.jar -calb -c 10 3 a b -e prueba.txt ");
-                    System.out.println("         Descifrar: java -jar Cifrado.jar -calb -d -e prueba.cif ");
+                    System.out.println("         Cifrar: java -jar Cifrado.jar -ctr -c -ts -e prueba.txt ");
+                    System.out.println("         Descifrar: java -jar Cifrado.jar -ctr -d -ts -e prueba.cif ");
                     System.out.println("\nElaborado por: Andres Felipe Vega felipevega@unicauca.edu.co");
+                    flag=true;
                 }else{
-                    System.out.println("Error de sintaxis.");
+                    if(flag==false)
+                        System.out.println("Error de sintaxis.");
                 
                 }
 
@@ -101,23 +109,27 @@ public class Cifrado {
                  * para entrar a cada uno de los distintos algoritmos de cifrado
                  */
                 
-                if(args.length==5){     
+                if(args.length==5 || args.length==6 ){     
                     switch(args[0]){
                         // Algoritmo de Trithemius
+                      
                         case "-ctth": 
-                            // Cifrar con algoritmo de Trithemius.
-                            if(args[1].equals("-c")& args[3].equals("-e") & !args[4].equals("")){
+                               System.out.println("\nAlgoritmo de cifrado de Trithemius");
+                             if(args[1].equals("-c")& args[3].equals("-e") & !args[4].equals("")){
 
                                 System.out.println("procesando....");
                                 if(args[2].equals("-64")){
 
                                     cod64.codificar64(args[4]);
-                                    trit.cifrar64(args[4].split("\\.")[0]+".64");
+                                    trit.cifrar64(args[4].split("\\.")[0]+".b64");
+                                    System.out.println("Archivo cifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[4].split("\\.")[0]+".cif64");
                                 }else{
                                     trit.cifrar(args[4]);
+                                    System.out.println("Archivo cifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[4].split("\\.")[0]+".cif");
                                 }
-                                System.out.println("Archivo cifrado correctamente.");
-                                System.out.println("Archivo creado: "+ args[4].split("\\.")[0]+".cif");
+                                
                                 break;
                             }    
                             // Descifrar con algoritmo de Trithemius.
@@ -126,45 +138,75 @@ public class Cifrado {
                                 System.out.println("procesando....");
                                 if(args[2].equals("-64")){
                                     
-                                    trit.descrifrar64(args[4].split("\\.")[0]+".cif");
-                                    cod64.descodificar64(args[4].split("\\.")[0]+".dec");
+                                    trit.descifrar64(args[4].split("\\.")[0]+".cif64");
+                                    cod64.descodificar64(args[4].split("\\.")[0]+".dec64");
+                                    System.out.println("Archivo descifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[4].split("\\.")[0]+".dec");
                                 }else{
-                                    trit.descrifrar(args[4]);
+                                    trit.descifrar(args[4]);
+                                    System.out.println("Archivo descifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[4].split("\\.")[0]+".dec");
                                 }
 
 
-                                System.out.println("Archivo descifrado correctamente.");
-                                System.out.println("Archivo creado: "+ args[4].split("\\.")[0]+".dec");
+                                
+                                 break;
+
+                            }else{
+                                System.out.println("Error de sintaxis.");
+
+                            }
+                            ////
+                            
+                            
+                            
+                        break;
+                         //algoritmo de Transpocision
+                        case "-ctr":
+                            System.out.println("\nAlgoritmo de cifrado por transpocision");
+                          
+                            // Cifrar con algoritmo de Trithemius.
+                            if(args[1].equals("-c") & !args[2].equals("") & !args[3].equals("") & args[4].equals("-e") & !args[5].equals("")){
+                                
+                                System.out.println("procesando....");
+                                if(args[3].equals("-64")){
+
+                                    cod64.codificar64(args[5]);
+                                    transp.cifrar(args[5].split("\\.")[0]+".b64",args[2],args[3]);
+                                    System.out.println("Archivo cifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[5].split("\\.")[0]+".cif64");
+                               
+                                }else{
+                                    transp.cifrar(args[5],args[2],args[3]);
+                                    System.out.println("Archivo cifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[5].split("\\.")[0]+".cif");
+                                }
+                                
+                                break;
+                            }    
+                            // Descifrar con algoritmo de Transposicion.
+                             if(args[1].equals("-d") & !args[2].equals("") & !args[3].equals("") & args[4].equals("-e") & !args[5].equals("")){
+                               
+                                System.out.println("procesando....");
+                                if(args[3].equals("-64")){
+                                    
+                                    transp.descifrar(args[5].split("\\.")[0]+".cif64",args[2],args[3]);
+                                    cod64.descodificar64(args[5].split("\\.")[0]+".dec64");
+                                    System.out.println("Archivo descifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[5].split("\\.")[0]+".dec");
+                                    
+                                }else{
+                                    transp.descifrar(args[5],args[2],args[3]);
+                                    System.out.println("Archivo descifrado correctamente.");
+                                    System.out.println("Archivo creado: "+ args[5].split("\\.")[0]+".dec");
+                                }
+
+
+                                
                                  break;
 
                             }else{
                                 System.out.println("error de sintaxis.");
-
-                            }
-                        break;
-                         //algoritmo de alberti
-                        case "-calb":
-
-                             // Cifrar con algoritmo de Trithemius.
-                            if(args[1].equals("-c")& !args[2].equals("") & !args[3].equals("") & !args[4].equals("") & !args[5].equals("")){
-
-                                System.out.println("procesando.... con alberti");
-
-                                System.out.println("Archivo cifrado correctamente.");
-                                System.out.println("Archivo creado: "+ args[3]+".cif");
-                                break;
-                            }    
-                            // Descifrar con algoritmo de Trithemius.
-                            if(args[1].equals("-d")& args[2].equals("-e") & !args[3].equals("")){
-
-
-                                System.out.println("procesando.... con alberti");
-                                System.out.println("Archivo descifrado correctamente.");
-                                System.out.println("Archivo creado: "+ args[3]+".dec");
-                                 break;
-
-                            }else{
-                                System.out.println("error de sintaxis.  ");
 
                             }
 

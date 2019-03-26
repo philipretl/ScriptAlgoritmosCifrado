@@ -28,8 +28,10 @@ public class Trithemius {
     private String matriz64 [][]; 
     
     private String textoClaro;
+    
     private String[] abecedario = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N","Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    String[] abecedario64= {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+    
+    private String[] abecedario64= {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
         "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9","+","/"};
         
             
@@ -98,6 +100,10 @@ public class Trithemius {
         File archivo = new File(ruta);
         BufferedWriter bw;
         
+        File antiguo=new File(ruta.split("\\.")[0]+".cif");
+        if (antiguo.exists()){
+            antiguo.delete();
+        }
         bw = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(ruta.split("\\.")[0]+".cif",true), "ISO-8859-1"));
         
@@ -108,7 +114,7 @@ public class Trithemius {
         int caract =f.read();
         while(caract != -1 ) {
             char caracter = (char) caract;
-            cadena=Character.toString((char)caract);
+            cadena=Character.toString((char)caract).toUpperCase();
             
             for (int j = 0; j < 27; j++) {
                 if(cadena.equals(matriz[j][0])){
@@ -128,14 +134,21 @@ public class Trithemius {
             flag=false;
           
         }
+        f.close();
         bw.close();
        
     }
  
     
-    public void descrifrar(String ruta) throws UnsupportedEncodingException, IOException{
+    public void descifrar(String ruta) throws UnsupportedEncodingException, IOException{
         int contador=0;
         boolean flag=false;
+        
+        
+         File antiguo=new File(ruta.split("\\.")[0]+".dec");
+        if (antiguo.exists()){
+            antiguo.delete();
+        }
         
         File archivo = new File(ruta);
         BufferedWriter bw;
@@ -168,6 +181,7 @@ public class Trithemius {
             flag=false;
           
         }
+        f.close();
         bw.close();
                 
 
@@ -180,9 +194,12 @@ public class Trithemius {
         boolean flag=false;
         File archivo = new File(ruta);
         BufferedWriter bw;
-        
+        File antiguo=new File(ruta.split("\\.")[0]+".cif64");
+        if (antiguo.exists()){
+            antiguo.delete();
+        }
         bw = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(ruta.split("\\.")[0]+".cif",true), "ISO-8859-1"));
+                    new FileOutputStream(ruta.split("\\.")[0]+".cif64",true), "ISO-8859-1"));
         
         String cadena = "";
         
@@ -211,19 +228,24 @@ public class Trithemius {
             flag=false;
           
         }
+        f.close();
         bw.close();
        
     }
  
     
-    public void descrifrar64(String ruta) throws UnsupportedEncodingException, IOException{
+    public void descifrar64(String ruta) throws UnsupportedEncodingException, IOException{
         int contador=0;
         boolean flag=false;
         
         File archivo = new File(ruta);
         BufferedWriter bw;
+        File antiguo=new File(ruta.split("\\.")[0]+".dec64");
+        if (antiguo.exists()){
+            antiguo.delete();
+        }
         bw = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(ruta.split("\\.")[0]+".dec",true), "ISO-8859-1"));
+                    new FileOutputStream(ruta.split("\\.")[0]+".dec64",true), "ISO-8859-1"));
         
         String cadena = "";
         
@@ -251,6 +273,7 @@ public class Trithemius {
             flag=false;
           
         }
+        f.close();
         bw.close();
                 
 

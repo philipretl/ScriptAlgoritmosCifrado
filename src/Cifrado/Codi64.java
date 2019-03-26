@@ -37,22 +37,25 @@ public class Codi64 {
         sbc= new StringBuilder();
         File archivo = new File(ruta);
         BufferedWriter bw;
-        
+        File antiguo=new File(ruta.split("\\.")[0]+".b64");
+        if (antiguo.exists()){
+            antiguo.delete();
+        }
         BufferedReader f = new BufferedReader(new InputStreamReader(new FileInputStream(archivo),"ISO-8859-1"));
         
         bw = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(ruta.split("\\.")[0]+".64",true), "ISO-8859-1"));
+                new FileOutputStream(ruta.split("\\.")[0]+".b64",true), "ISO-8859-1"));
         
         while ((textc= f.readLine())!=null) {
            sbc.append(textc);
         }
         f.close();
-        //System.out.println("texto: "+sbc);
+        
         Base64.Encoder encoder = Base64.getEncoder();
         cod = encoder.encodeToString(sbc.toString().getBytes(StandardCharsets.UTF_8) );  
         bw.write(cod);
         bw.close();
-        //return cod;
+       
     }
     
     
@@ -61,9 +64,12 @@ public class Codi64 {
         File archivo = new File(ruta);
         BufferedWriter bw; 
         sbd = new StringBuilder();
-        
+        File antiguo=new File(ruta.split("\\.")[0]+".dec");
+        if (antiguo.exists()){
+            antiguo.delete();
+        }
         bw = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(ruta.split("\\.")[0]+".dec64",true), "ISO-8859-1"));
+                new FileOutputStream(ruta.split("\\.")[0]+".dec",true), "ISO-8859-1"));
          
         BufferedReader f = new BufferedReader(new InputStreamReader(new FileInputStream(archivo),"ISO-8859-1"));
         
@@ -71,16 +77,23 @@ public class Codi64 {
            sbd.append(textd);
         }
         f.close();
-        //System.out.println("a descodificar "+sbd);
+        
         Base64.Decoder decoder = Base64.getDecoder();
         byte[] decodedByteArray = decoder.decode(sbd.toString());
             
         descod = new String(decodedByteArray);
         bw.write(descod);
         bw.close();
-        //File archivo2 = new File(ruta.split("\\.")[0]+".64");
-        //archivo2.delete();
-        //return descod;
+        
+        antiguo= new File(ruta.split("\\.")[0]+".b64");
+         if (antiguo.exists()){
+            antiguo.delete();
+        }
+        
+        antiguo= new File(ruta.split("\\.")[0]+".dec64");
+         if (antiguo.exists()){
+            antiguo.delete();
+        }
        
     }
     
