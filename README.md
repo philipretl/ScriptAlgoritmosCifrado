@@ -52,4 +52,5 @@
                               Cifrar: java -jar Cifrado.jar -ctr -c -ts -e prueba.txt    
                               Descifrar: java -jar Cifrado.jar -ctr -d -ts -e prueba.cif    
                      Elaborado por: Andres Felipe Vega felipevega@unicauca.edu.co    
+		     Docente: Siler Amador Donado samador@unicauca.edu.co
 
