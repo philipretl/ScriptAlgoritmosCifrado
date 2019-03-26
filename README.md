@@ -28,6 +28,7 @@
                               Cifrar: java -jar Cifrado.jar -c -e prueba.txt    
                               Descifrar: java -jar Cifrado.jar -d -e prueba.txt.cif    
                      Elaborado por: Andres Felipe Vega felipevega@unicauca.edu.co    
+		     Docente: Siler Amador Donado samador@unicauca.edu.co
                                    
                       Algoritmos de cifrado por Transpocision    
 	        -------------------------------------------------------------------------------------------------------------------
